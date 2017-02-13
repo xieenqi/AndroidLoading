@@ -43,8 +43,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ll_lading.setStatus(LoadingLayout.Empty);
                 break;
             case R.id.bt_customer:
+                LoadingLayout.getConfig()
+                        .setErrorText("customer出错啦~请稍后重试！")
+                        .setEmptyText("customer暂无数据!")
+                        .setNoNetworkText("customer网络不给力!")
+//                .setErrorImage(R.drawable.define_error)
+                        .setEmptyImage(R.mipmap.define_empty)
+                        .setNoNetworkImage(R.mipmap.define_nonetwork)
+                        .setAllTipTextColor(R.color.colorAccent)
+                        .setAllTipTextSize(20)
+                        .setReloadButtonText("customer重试")
+                        .setReloadButtonTextColor(R.color.colorPrimaryDark)
+                        .setReloadButtonBackgroundResource(R.drawable.retage_bule)
+                        .setReloadButtonTextSize(20);
                 break;
             case R.id.bt_reset:
+                ll_lading.setStatus(LoadingLayout.Loading);
                 break;
         }
     }

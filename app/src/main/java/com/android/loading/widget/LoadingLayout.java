@@ -87,7 +87,7 @@ public class LoadingLayout extends FrameLayout {
     /**
      * 用来在java代码中实例化的时候，调用做初始化工作
      */
-    public void init(){
+    public void init() {
         onFinishInflate();
     }
 
@@ -112,22 +112,20 @@ public class LoadingLayout extends FrameLayout {
     private void build() {
         LayoutInflater inflate = LayoutInflater.from(mContext);
         loadingPage = inflate.inflate(loadingLayoutId, null);
+        ladingAnimaytion = (AnimationDrawable) loadingPage.findViewById(R.id.iv_loading).getBackground();
         errorPage = inflate.inflate(R.layout.widget_error_page, null);
-        emptyPage = inflate.inflate(R.layout.widget_empty_page, null);
-        networkPage = inflate.inflate(R.layout.widget_nonetwork_page, null);
-
         errorText = Utils.findViewById(errorPage, R.id.error_text);
-        emptyText = Utils.findViewById(emptyPage, R.id.empty_text);
-        networkText = Utils.findViewById(networkPage, R.id.no_network_text);
-
         errorImg = Utils.findViewById(errorPage, R.id.error_img);
+
+        emptyPage = inflate.inflate(R.layout.widget_empty_page, null);
+        emptyText = Utils.findViewById(emptyPage, R.id.empty_text);
         emptyImg = Utils.findViewById(emptyPage, R.id.empty_img);
+
+        networkPage = inflate.inflate(R.layout.widget_nonetwork_page, null);
+        networkText = Utils.findViewById(networkPage, R.id.no_network_text);
         networkImg = Utils.findViewById(networkPage, R.id.no_network_img);
 
         errorReloadBtn = Utils.findViewById(errorPage, R.id.error_reload_btn);
-        networkReloadBtn = Utils.findViewById(networkPage, R.id.no_network_reload_btn);
-
-        ladingAnimaytion = (AnimationDrawable) loadingPage.findViewById(R.id.iv_loading).getBackground();
         errorReloadBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +135,7 @@ public class LoadingLayout extends FrameLayout {
                 }
             }
         });
+        networkReloadBtn = Utils.findViewById(networkPage, R.id.no_network_reload_btn);
         networkReloadBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,32 +147,28 @@ public class LoadingLayout extends FrameLayout {
         });
 
         errorText.setText(errorStr);
-        emptyText.setText(emptyStr);
-        networkText.setText(netwrokStr);
-
         errorText.setTextSize(tipTextSize);
-        emptyText.setTextSize(tipTextSize);
-        networkText.setTextSize(tipTextSize);
-
         errorText.setTextColor(Utils.getColor(mContext, tipTextColor));
-        emptyText.setTextColor(Utils.getColor(mContext, tipTextColor));
-        networkText.setTextColor(Utils.getColor(mContext, tipTextColor));
-
         errorImg.setImageResource(errorImgId);
+
+        emptyText.setText(emptyStr);
+        emptyText.setTextSize(tipTextSize);
+        emptyText.setTextColor(Utils.getColor(mContext, tipTextColor));
         emptyImg.setImageResource(emptyImgId);
+
+        networkText.setText(netwrokStr);
+        networkText.setTextSize(tipTextSize);
+        networkText.setTextColor(Utils.getColor(mContext, tipTextColor));
         networkImg.setImageResource(networkImgId);
 
-
         errorReloadBtn.setBackgroundResource(reloadBtnId);
-        networkReloadBtn.setBackgroundResource(reloadBtnId);
-
         errorReloadBtn.setText(reloadBtnStr);
-        networkReloadBtn.setText(reloadBtnStr);
-
         errorReloadBtn.setTextSize(buttonTextSize);
-        networkReloadBtn.setTextSize(buttonTextSize);
-
         errorReloadBtn.setTextColor(Utils.getColor(mContext, buttonTextColor));
+
+        networkReloadBtn.setBackgroundResource(reloadBtnId);
+        networkReloadBtn.setText(reloadBtnStr);
+        networkReloadBtn.setTextSize(buttonTextSize);
         networkReloadBtn.setTextColor(Utils.getColor(mContext, buttonTextColor));
 
         if (buttonHeight != -1) {
@@ -195,11 +190,6 @@ public class LoadingLayout extends FrameLayout {
 
     public void setStatus(@Flavour int status) {
         this.state = status;
-//        public final static int Success = 0;
-//        public final static int Empty = 1;
-//        public final static int Error = 2;
-//        public final static int No_Network = 3;
-//        public final static int Loading = 4;
         switch (status) {
             case Success:
 
@@ -260,8 +250,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 返回当前状态{Success, Empty, Error, No_Network, Loading}
-     *
-     * @return
      */
     public int getStatus() {
 
@@ -270,9 +258,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Empty状态提示文本，仅对当前所在的地方有效
-     *
-     * @param text
-     * @return
      */
     public LoadingLayout setEmptyText(String text) {
 
@@ -282,9 +267,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Error状态提示文本，仅对当前所在的地方有效
-     *
-     * @param text
-     * @return
      */
     public LoadingLayout setErrorText(String text) {
 
@@ -294,9 +276,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置No_Network状态提示文本，仅对当前所在的地方有效
-     *
-     * @param text
-     * @return
      */
     public LoadingLayout setNoNetworkText(String text) {
 
@@ -306,9 +285,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Empty状态显示图片，仅对当前所在的地方有效
-     *
-     * @param id
-     * @return
      */
     public LoadingLayout setEmptyImage(@DrawableRes int id) {
 
@@ -319,9 +295,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Error状态显示图片，仅对当前所在的地方有效
-     *
-     * @param id
-     * @return
      */
     public LoadingLayout setErrorImage(@DrawableRes int id) {
 
@@ -331,9 +304,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置No_Network状态显示图片，仅对当前所在的地方有效
-     *
-     * @param id
-     * @return
      */
     public LoadingLayout setNoNetworkImage(@DrawableRes int id) {
 
@@ -343,9 +313,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Empty状态提示文本的字体大小，仅对当前所在的地方有效
-     *
-     * @param sp
-     * @return
      */
     public LoadingLayout setEmptyTextSize(int sp) {
 
@@ -355,9 +322,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Error状态提示文本的字体大小，仅对当前所在的地方有效
-     *
-     * @param sp
-     * @return
      */
     public LoadingLayout setErrorTextSize(int sp) {
 
@@ -367,9 +331,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置No_Network状态提示文本的字体大小，仅对当前所在的地方有效
-     *
-     * @param sp
-     * @return
      */
     public LoadingLayout setNoNetworkTextSize(int sp) {
 
@@ -379,9 +340,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Empty状态图片的显示与否，仅对当前所在的地方有效
-     *
-     * @param bool
-     * @return
      */
     public LoadingLayout setEmptyImageVisible(boolean bool) {
 
@@ -395,9 +353,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置Error状态图片的显示与否，仅对当前所在的地方有效
-     *
-     * @param bool
-     * @return
      */
     public LoadingLayout setErrorImageVisible(boolean bool) {
 
@@ -411,9 +366,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置No_Network状态图片的显示与否，仅对当前所在的地方有效
-     *
-     * @param bool
-     * @return
      */
     public LoadingLayout setNoNetworkImageVisible(boolean bool) {
 
@@ -427,9 +379,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置ReloadButton的文本，仅对当前所在的地方有效
-     *
-     * @param text
-     * @return
      */
     public LoadingLayout setReloadButtonText(@NonNull String text) {
 
@@ -440,9 +389,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置ReloadButton的文本字体大小，仅对当前所在的地方有效
-     *
-     * @param sp
-     * @return
      */
     public LoadingLayout setReloadButtonTextSize(int sp) {
 
@@ -453,9 +399,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置ReloadButton的文本颜色，仅对当前所在的地方有效
-     *
-     * @param id
-     * @return
      */
     public LoadingLayout setReloadButtonTextColor(@ColorRes int id) {
 
@@ -466,9 +409,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置ReloadButton的背景，仅对当前所在的地方有效
-     *
-     * @param id
-     * @return
      */
     public LoadingLayout setReloadButtonBackgroundResource(@DrawableRes int id) {
 
@@ -479,9 +419,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 设置ReloadButton的监听器
-     *
-     * @param listener
-     * @return
      */
     public LoadingLayout setOnReloadListener(OnReloadListener listener) {
 
@@ -491,9 +428,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 自定义加载页面，仅对当前所在的Activity有效
-     *
-     * @param view
-     * @return
      */
     public LoadingLayout setLoadingPage(View view) {
 
@@ -505,9 +439,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 自定义加载页面，仅对当前所在的地方有效
-     *
-     * @param id
-     * @return
      */
     public LoadingLayout setLoadingPage(@LayoutRes int id) {
 
@@ -520,8 +451,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 获取当前自定义的loadingpage
-     *
-     * @return
      */
     public View getLoadingPage() {
 
@@ -531,8 +460,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 获取全局使用的loadingpage
-     *
-     * @return
      */
     public View getGlobalLoadingPage() {
 
@@ -551,8 +478,6 @@ public class LoadingLayout extends FrameLayout {
 
     /**
      * 获取全局配置的class
-     *
-     * @return
      */
     public static Config getConfig() {
 
@@ -565,99 +490,105 @@ public class LoadingLayout extends FrameLayout {
     public static class Config {
 
         public Config setErrorText(@NonNull String text) {
-
             errorStr = text;
             return mConfig;
         }
 
         public Config setEmptyText(@NonNull String text) {
-
             emptyStr = text;
             return mConfig;
         }
 
         public Config setNoNetworkText(@NonNull String text) {
-
             netwrokStr = text;
             return mConfig;
         }
 
+        /**
+         * 重试按钮 文字
+         */
         public Config setReloadButtonText(@NonNull String text) {
-
             reloadBtnStr = text;
             return mConfig;
         }
 
         /**
          * 设置所有提示文本的字体大小
-         *
-         * @param sp
-         * @return
          */
         public Config setAllTipTextSize(int sp) {
-
             tipTextSize = sp;
             return mConfig;
         }
 
-
         /**
          * 设置所有提示文本的字体颜色
-         *
-         * @param color
-         * @return
          */
         public Config setAllTipTextColor(@ColorRes int color) {
-
             tipTextColor = color;
             return mConfig;
         }
 
+        /**
+         * 重试按钮文字大小
+         */
         public Config setReloadButtonTextSize(int sp) {
-
             buttonTextSize = sp;
             return mConfig;
         }
 
+        /**
+         * 重试按钮文字  颜色
+         */
         public Config setReloadButtonTextColor(@ColorRes int color) {
-
             buttonTextColor = color;
             return mConfig;
         }
 
+        /**
+         * 重试按钮  背景
+         */
         public Config setReloadButtonBackgroundResource(@DrawableRes int id) {
-
             reloadBtnId = id;
             return mConfig;
         }
 
+        /**
+         * 重试按钮 宽 高
+         */
         public Config setReloadButtonWidthAndHeight(int width_dp, int height_dp) {
-
             buttonWidth = width_dp;
             buttonHeight = height_dp;
             return mConfig;
         }
 
+        /**
+         * 错误页面 的图片
+         */
         public Config setErrorImage(@DrawableRes int id) {
-
             errorImgId = id;
             return mConfig;
         }
 
+        /**
+         * 空数据 的图片
+         */
         public Config setEmptyImage(@DrawableRes int id) {
-
             emptyImgId = id;
             return this;
         }
 
+        /**
+         * 没有网络时第图片
+         */
         public Config setNoNetworkImage(@DrawableRes int id) {
-
             networkImgId = id;
             return mConfig;
         }
 
+        /**
+         * 加载数据 的布局
+         */
         public Config setLoadingPageLayout(@LayoutRes int id) {
-
             loadingLayoutId = id;
             return mConfig;
         }
