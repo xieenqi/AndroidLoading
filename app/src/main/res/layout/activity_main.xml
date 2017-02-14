@@ -51,10 +51,10 @@
             android:text="空数据" />
 
         <!--<Button-->
-            <!--android:id="@+id/bt_"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="数据出错" />-->
+        <!--android:id="@+id/bt_"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="数据出错" />-->
 
         <Button
             android:id="@+id/bt_customer"
@@ -66,6 +66,7 @@
             android:id="@+id/bt_reset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="重置设置" />
+            android:text="重置设置"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

@@ -1,5 +1,6 @@
 package com.android.loading;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ll_lading.setStatus(LoadingLayout.Empty);
                 break;
             case R.id.bt_customer:
+                Intent intent = getIntent();
+                overridePendingTransition(0, 0);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
+//                ll_lading.setStatus(LoadingLayout.Loading);
+//                ll_lading = (LoadingLayout) findViewById(R.id.ll_lading);
                 LoadingLayout.getConfig()
                         .setErrorText("customer出错啦~请稍后重试！")
                         .setEmptyText("customer暂无数据!")
@@ -58,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setReloadButtonTextSize(20);
                 break;
             case R.id.bt_reset:
-                ll_lading.setStatus(LoadingLayout.Loading);
+
                 break;
         }
     }
